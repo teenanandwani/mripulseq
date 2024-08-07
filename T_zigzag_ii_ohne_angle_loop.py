@@ -73,12 +73,12 @@ seq.add_block(pp.make_delay(9e-3))
 gx = pp.make_trapezoid(channel='x', flat_area=Nread - 2, flat_time=0.5e-3, system=system)
 gx_prewinder = pp.make_trapezoid(channel='x', area= -gx.area/2, duration=1e-3, system=system)
 gy_prewinder = pp.make_trapezoid(channel='y', area= -gx.area/2, duration=1e-3, system=system)
-adc0 = pp.make_adc(num_samples=Nread, duration=0.5e-3, phase_offset=0 * np.pi / 180, delay=gx.rise_time, system=system)
+adc0 = pp.make_adc(num_samples=Nread*Nphase, duration=0.5e-3, phase_offset=0 * np.pi / 180, delay=gx.rise_time, system=system)
 
 seq.add_block(gx_prewinder,gy_prewinder)  
 
-
-for _ in range(11):  # repeat the pattern
+n=11
+for _ in range(n):  # repeat the pattern
     
     gx = pp.make_trapezoid(channel='x', flat_area=Nread - 1 , flat_time=0.5e-3, system=system)
     gy = pp.make_trapezoid(channel='x', flat_area=Nread - 2, flat_time=0.8e-3, system=system)
